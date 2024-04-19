@@ -15,19 +15,34 @@ function createList(forecastData) {
 
 function weatherCards() {
     const newCard = $('<div>');
-    newCard.addClass('card col-1').css('background-image, linear-gradient (to righ')
+    newCard.addClass('card col-1').css('display', 'inline').css('background-image', 'linear-gradient(gray,black)')
 }
 
 function mainCard(forecastData) {
     const cardHeader = $('<h3>');
     const today = dayjs().format('MM/DD/YYYY');
-    cardHeader.addClass('card-text').text(`${forecastData.city.name} ${today}`).css('color', 'white').css('font-weight', 'bold');
+    cardHeader.addClass('card-text').text(`${forecastData.city.name} ${today}`).css('color', 'white').css('font-weight', 'bold').css('margin', '30px 30px');
+    
     const cardBody = $('<ul>')
     const temp = forecastData.list[0].main.temp;
-    cardBody.addClass('body-text').text(`Temp: ${temp}`).css('color', 'white').css('font-size', '20px').css('margin', '10px');
+    cardBody.addClass('body-text').text(`Temp: ${temp} `).css('color', 'white').css('font-size', '20px').css('margin', '30px 30px');
 
-    cardHeader.append(cardBody);
+    const cardWind = $('<ul>')
+    const wind = forecastData.list[0].wind.speed;
+    cardWind.addClass('wind-text').text(`Wind: ${wind} MPH `).css('color', 'white').css('font-size', '20px').css('margin', '30px 30px');
+
+    const cardHumidity = $('<ul>')
+    const humidity = forecastData.list[0].main.humidity;
+    cardHumidity.addClass('humidity-text').text(`Humidity: ${humidity} % `).css('color', 'white').css('font-size', '20px').css('margin', '30px 30px');
+
+    const cardIcon = $('<ul>')
+    const icon = forecastData.list[0].weather[0].icon;
+    cardIcon.addClass('icon').css('img',icon);
+
+    cardHeader.append(cardBody,cardWind,cardHumidity,cardIcon);
     bigCard.append(cardHeader);
+    
+   
 
 }
 
@@ -36,6 +51,7 @@ function mainCard(forecastData) {
 searchBtn.on('click', function (event) {
     event.preventDefault();
     // console.log(event);
+
     getWeatherData();
     // createList(event);
     
