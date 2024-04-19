@@ -3,6 +3,7 @@ const searchBtn = $('.btn-primary');
 const cityList = $('.city-list');
 const cityInput = $('#city-input');
 const searchList = $('.search-list');
+const bigCard = $('.main-card');
 
 
 function createList(forecastData) {
@@ -15,6 +16,19 @@ function createList(forecastData) {
 function weatherCards() {
     const newCard = $('<div>');
     newCard.addClass('card col-1').css('background-image, linear-gradient (to righ')
+}
+
+function mainCard(forecastData) {
+    const cardHeader = $('<h3>');
+    const today = dayjs().format('MM/DD/YYYY');
+    cardHeader.addClass('card-text').text(`${forecastData.city.name} ${today}`).css('color', 'white').css('font-weight', 'bold');
+    const cardBody = $('<ul>')
+    const temp = forecastData.list[0].main.temp;
+    cardBody.addClass('body-text').text(`Temp: ${temp}`).css('color', 'white').css('font-size', '20px').css('margin', '10px');
+
+    cardHeader.append(cardBody);
+    bigCard.append(cardHeader);
+
 }
 
 
@@ -44,8 +58,10 @@ function getWeatherData() {
     })
 
     .then(function (forecastData) {
+        console.log(forecastData);
         console.log(forecastData.city.name);
         createList(forecastData);
+        mainCard(forecastData);
 
 })};
 
