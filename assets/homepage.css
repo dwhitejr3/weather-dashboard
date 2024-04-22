@@ -18,3 +18,13 @@ h3 {
   
 }
 
+.hide {
+    display: none;
+}
+
+.mini-cards {
+    position: relative;
+    top: 180px; left: 10px;
+
+}
+
